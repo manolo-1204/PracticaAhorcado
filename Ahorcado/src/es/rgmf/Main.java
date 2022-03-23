@@ -9,14 +9,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        String frase;
+        String frase, adivina;
+        char letra, seguir = 'N';
         String[] frases;
         char[] fraseOculta;
         Scanner entrada = new Scanner(System.in);
         Path path;
 
         // Carga el fichero con las frases
-        path = Paths.get("src/es/rgmf/frases.txt");
+        path = Paths.get("Ahorcado/src/es/rgmf/frases.txt");
         try {
             frases = Files.lines(path).toArray(String[]::new);
         } catch (IOException e) {
@@ -40,7 +41,30 @@ public class Main {
         // Muestra la frase oculta.
         System.out.println(fraseOculta);
 
-        // TODO Completa el programa.
+        while (seguir != 'S') {
+
+            System.out.print("Dame un letra: ");
+            letra = entrada.nextLine().charAt(0);
+
+            for (int i = 0; i < frase.length(); i++) {
+                if (frase.toLowerCase().charAt(i) == letra) {
+                    fraseOculta[i] = frase.charAt(i);
+                }
+            }
+
+            System.out.println(fraseOculta);
+
+            System.out.print("¿Quieres adivinarla? (S/N) ");
+            seguir = entrada.nextLine().charAt(0);
+        }
+        System.out.println("¿Qué frase crees que es? ");
+        adivina = entrada.nextLine();
+
+        if (adivina.equals(frase)) {
+            System.out.println("OLEEE, acertaste!");
+        } else {
+            System.out.println("Nooo, fallaste. La frase era " + frase);
+        }
 
         entrada.close();
     }
