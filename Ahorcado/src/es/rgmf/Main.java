@@ -17,7 +17,7 @@ public class Main {
         Path path;
 
         // Carga el fichero con las frases
-        path = Paths.get("Ahorcado/src/es/rgmf/frases.txt");
+        path = Paths.get("src/es/rgmf/frases.txt");
         try {
             frases = Files.lines(path).toArray(String[]::new);
         } catch (IOException e) {
